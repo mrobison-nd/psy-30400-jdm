@@ -56,16 +56,19 @@ flowScheduler.add(crt_trialsLoopScheduler);
 flowScheduler.add(crt_trialsLoopEnd);
 
 
+
 const prob_trialsLoopScheduler = new Scheduler(psychoJS);
 flowScheduler.add(prob_trialsLoopBegin(prob_trialsLoopScheduler));
 flowScheduler.add(prob_trialsLoopScheduler);
 flowScheduler.add(prob_trialsLoopEnd);
 
 
+
 const gl_trialsLoopScheduler = new Scheduler(psychoJS);
 flowScheduler.add(gl_trialsLoopBegin(gl_trialsLoopScheduler));
 flowScheduler.add(gl_trialsLoopScheduler);
 flowScheduler.add(gl_trialsLoopEnd);
+
 
 
 flowScheduler.add(end_taskRoutineBegin());
@@ -82,7 +85,7 @@ psychoJS.start({
   resources: [
     // resources:
     {'name': 'crt_items.xlsx', 'path': 'crt_items.xlsx'},
-    {'name': 'jdm_questions.xlsx', 'path': 'jdm_questions.xlsx'},
+    {'name': 'jdm_questions.csv', 'path': 'jdm_questions.csv'},
     {'name': 'gain_loss.xlsx', 'path': 'gain_loss.xlsx'},
   ]
 });
@@ -129,18 +132,22 @@ var textbox;
 var key_resp;
 var text_5;
 var text_6;
+var blank250Clock;
+var text_11;
 var prob_trialClock;
 var text_2;
 var text_3;
-var button3;
-var button4;
-var button5;
 var mouse_2;
+var ans1_text;
+var ans2_text;
+var ans3_text;
+var text_10;
 var gl_trialClock;
 var text;
-var button1;
-var button2;
 var mouse;
+var opt1_text;
+var opt2_text;
+var text_9;
 var end_taskClock;
 var text_8;
 var globalClock;
@@ -228,6 +235,20 @@ async function experimentInit() {
     depth: -4.0 
   });
   
+  // Initialize components for Routine "blank250"
+  blank250Clock = new util.Clock();
+  text_11 = new visual.TextStim({
+    win: psychoJS.window,
+    name: 'text_11',
+    text: '',
+    font: 'Arial',
+    units: undefined, 
+    pos: [0, 0], draggable: false, height: 0.05,  wrapWidth: undefined, ori: 0.0,
+    languageStyle: 'LTR',
+    color: new util.Color('white'),  opacity: undefined,
+    depth: 0.0 
+  });
+  
   // Initialize components for Routine "prob_trial"
   prob_trialClock = new util.Clock();
   text_2 = new visual.TextStim({
@@ -236,7 +257,7 @@ async function experimentInit() {
     text: '',
     font: 'Arial',
     units: undefined, 
-    pos: [0, 0.4], draggable: false, height: 0.03,  wrapWidth: undefined, ori: 0.0,
+    pos: [0, 0.3], draggable: false, height: 0.03,  wrapWidth: undefined, ori: 0.0,
     languageStyle: 'LTR',
     color: new util.Color('black'),  opacity: undefined,
     depth: 0.0 
@@ -248,67 +269,64 @@ async function experimentInit() {
     text: '',
     font: 'Arial',
     units: undefined, 
-    pos: [0, 0], draggable: false, height: 0.03,  wrapWidth: undefined, ori: 0.0,
+    pos: [0, 0.1], draggable: false, height: 0.03,  wrapWidth: undefined, ori: 0.0,
     languageStyle: 'LTR',
     color: new util.Color('black'),  opacity: undefined,
     depth: -1.0 
   });
   
-  button3 = new visual.ButtonStim({
-    win: psychoJS.window,
-    name: 'button3',
-    text: '',
-    fillColor: 'darkgrey',
-    borderColor: 'black',
-    color: 'black',
-    colorSpace: 'rgb',
-    pos: [(- 0.4), 0],
-    letterHeight: 0.02,
-    size: [0.3, 0.1],
-    ori: 0.0
-    ,
-    depth: -2
-  });
-  button3.clock = new util.Clock();
-  
-  button4 = new visual.ButtonStim({
-    win: psychoJS.window,
-    name: 'button4',
-    text: '',
-    fillColor: 'darkgrey',
-    borderColor: 'black',
-    color: 'black',
-    colorSpace: 'rgb',
-    pos: [0, 0],
-    letterHeight: 0.02,
-    size: [0.3, 0.1],
-    ori: 0.0
-    ,
-    depth: -3
-  });
-  button4.clock = new util.Clock();
-  
-  button5 = new visual.ButtonStim({
-    win: psychoJS.window,
-    name: 'button5',
-    text: '',
-    fillColor: 'darkgrey',
-    borderColor: 'black',
-    color: 'black',
-    colorSpace: 'rgb',
-    pos: [0.4, 0],
-    letterHeight: 0.02,
-    size: [0.3, 0.1],
-    ori: 0.0
-    ,
-    depth: -4
-  });
-  button5.clock = new util.Clock();
-  
   mouse_2 = new core.Mouse({
     win: psychoJS.window,
   });
   mouse_2.mouseClock = new util.Clock();
+  ans1_text = new visual.TextStim({
+    win: psychoJS.window,
+    name: 'ans1_text',
+    text: '',
+    font: 'Arial',
+    units: undefined, 
+    pos: [0, (- 0.1)], draggable: false, height: 0.03,  wrapWidth: undefined, ori: 0.0,
+    languageStyle: 'LTR',
+    color: new util.Color('black'),  opacity: undefined,
+    depth: -3.0 
+  });
+  
+  ans2_text = new visual.TextStim({
+    win: psychoJS.window,
+    name: 'ans2_text',
+    text: '',
+    font: 'Arial',
+    units: undefined, 
+    pos: [0, (- 0.2)], draggable: false, height: 0.03,  wrapWidth: undefined, ori: 0.0,
+    languageStyle: 'LTR',
+    color: new util.Color('black'),  opacity: undefined,
+    depth: -4.0 
+  });
+  
+  ans3_text = new visual.TextStim({
+    win: psychoJS.window,
+    name: 'ans3_text',
+    text: '',
+    font: 'Arial',
+    units: undefined, 
+    pos: [0, (- 0.3)], draggable: false, height: 0.03,  wrapWidth: undefined, ori: 0.0,
+    languageStyle: 'LTR',
+    color: new util.Color('black'),  opacity: undefined,
+    depth: -5.0 
+  });
+  
+  text_10 = new visual.TextStim({
+    win: psychoJS.window,
+    name: 'text_10',
+    text: '(click one option)',
+    font: 'Arial',
+    units: undefined, 
+    pos: [0, (- 0.4)], draggable: false, height: 0.02,  wrapWidth: undefined, ori: 0.0,
+    languageStyle: 'LTR',
+    color: new util.Color('black'),  opacity: undefined,
+    depth: -6.0 
+  });
+  
   // Initialize components for Routine "gl_trial"
   gl_trialClock = new util.Clock();
   text = new visual.TextStim({
@@ -323,44 +341,46 @@ async function experimentInit() {
     depth: 0.0 
   });
   
-  button1 = new visual.ButtonStim({
-    win: psychoJS.window,
-    name: 'button1',
-    text: '',
-    fillColor: 'darkgrey',
-    borderColor: 'black',
-    color: 'black',
-    colorSpace: 'rgb',
-    pos: [(- 0.4), 0],
-    letterHeight: 0.02,
-    size: [0.4, 0.1],
-    ori: 0.0
-    ,
-    depth: -1
-  });
-  button1.clock = new util.Clock();
-  
-  button2 = new visual.ButtonStim({
-    win: psychoJS.window,
-    name: 'button2',
-    text: '',
-    fillColor: 'darkgrey',
-    borderColor: 'black',
-    color: 'black',
-    colorSpace: 'rgb',
-    pos: [0.4, 0],
-    letterHeight: 0.02,
-    size: [0.4, 0.1],
-    ori: 0.0
-    ,
-    depth: -2
-  });
-  button2.clock = new util.Clock();
-  
   mouse = new core.Mouse({
     win: psychoJS.window,
   });
   mouse.mouseClock = new util.Clock();
+  opt1_text = new visual.TextStim({
+    win: psychoJS.window,
+    name: 'opt1_text',
+    text: '',
+    font: 'Arial',
+    units: undefined, 
+    pos: [0, 0], draggable: false, height: 0.03,  wrapWidth: undefined, ori: 0.0,
+    languageStyle: 'LTR',
+    color: new util.Color('black'),  opacity: undefined,
+    depth: -2.0 
+  });
+  
+  opt2_text = new visual.TextStim({
+    win: psychoJS.window,
+    name: 'opt2_text',
+    text: '',
+    font: 'Arial',
+    units: undefined, 
+    pos: [0, (- 0.1)], draggable: false, height: 0.03,  wrapWidth: undefined, ori: 0.0,
+    languageStyle: 'LTR',
+    color: new util.Color('black'),  opacity: undefined,
+    depth: -3.0 
+  });
+  
+  text_9 = new visual.TextStim({
+    win: psychoJS.window,
+    name: 'text_9',
+    text: '(click one option)',
+    font: 'Arial',
+    units: undefined, 
+    pos: [0, (- 0.4)], draggable: false, height: 0.02,  wrapWidth: undefined, ori: 0.0,
+    languageStyle: 'LTR',
+    color: new util.Color('black'),  opacity: undefined,
+    depth: -4.0 
+  });
+  
   // Initialize components for Routine "end_task"
   end_taskClock = new util.Clock();
   text_8 = new visual.TextStim({
@@ -544,6 +564,9 @@ function crt_trialsLoopBegin(crt_trialsLoopScheduler, snapshot) {
       crt_trialsLoopScheduler.add(crt_trialRoutineBegin(snapshot));
       crt_trialsLoopScheduler.add(crt_trialRoutineEachFrame());
       crt_trialsLoopScheduler.add(crt_trialRoutineEnd(snapshot));
+      crt_trialsLoopScheduler.add(blank250RoutineBegin(snapshot));
+      crt_trialsLoopScheduler.add(blank250RoutineEachFrame());
+      crt_trialsLoopScheduler.add(blank250RoutineEnd(snapshot));
       crt_trialsLoopScheduler.add(crt_trialsLoopEndIteration(crt_trialsLoopScheduler, snapshot));
     }
     
@@ -592,9 +615,9 @@ function prob_trialsLoopBegin(prob_trialsLoopScheduler, snapshot) {
     // set up handler to look after randomisation of conditions etc
     prob_trials = new TrialHandler({
       psychoJS: psychoJS,
-      nReps: undefined, method: TrialHandler.Method.RANDOM,
+      nReps: 1, method: TrialHandler.Method.RANDOM,
       extraInfo: expInfo, originPath: undefined,
-      trialList: 'jdm_questions.xlsx',
+      trialList: 'jdm_questions.csv',
       seed: undefined, name: 'prob_trials'
     });
     psychoJS.experiment.addLoop(prob_trials); // add the loop to the experiment
@@ -607,6 +630,9 @@ function prob_trialsLoopBegin(prob_trialsLoopScheduler, snapshot) {
       prob_trialsLoopScheduler.add(prob_trialRoutineBegin(snapshot));
       prob_trialsLoopScheduler.add(prob_trialRoutineEachFrame());
       prob_trialsLoopScheduler.add(prob_trialRoutineEnd(snapshot));
+      prob_trialsLoopScheduler.add(blank250RoutineBegin(snapshot));
+      prob_trialsLoopScheduler.add(blank250RoutineEachFrame());
+      prob_trialsLoopScheduler.add(blank250RoutineEnd(snapshot));
       prob_trialsLoopScheduler.add(prob_trialsLoopEndIteration(prob_trialsLoopScheduler, snapshot));
     }
     
@@ -670,6 +696,9 @@ function gl_trialsLoopBegin(gl_trialsLoopScheduler, snapshot) {
       gl_trialsLoopScheduler.add(gl_trialRoutineBegin(snapshot));
       gl_trialsLoopScheduler.add(gl_trialRoutineEachFrame());
       gl_trialsLoopScheduler.add(gl_trialRoutineEnd(snapshot));
+      gl_trialsLoopScheduler.add(blank250RoutineBegin(snapshot));
+      gl_trialsLoopScheduler.add(blank250RoutineEachFrame());
+      gl_trialsLoopScheduler.add(blank250RoutineEnd(snapshot));
       gl_trialsLoopScheduler.add(gl_trialsLoopEndIteration(gl_trialsLoopScheduler, snapshot));
     }
     
@@ -883,6 +912,113 @@ function crt_trialRoutineEnd(snapshot) {
 }
 
 
+var blank250MaxDurationReached;
+var blank250MaxDuration;
+var blank250Components;
+function blank250RoutineBegin(snapshot) {
+  return async function () {
+    TrialHandler.fromSnapshot(snapshot); // ensure that .thisN vals are up to date
+    
+    //--- Prepare to start Routine 'blank250' ---
+    t = 0;
+    blank250Clock.reset(); // clock
+    frameN = -1;
+    continueRoutine = true; // until we're told otherwise
+    routineTimer.add(0.250000);
+    blank250MaxDurationReached = false;
+    // update component parameters for each repeat
+    psychoJS.experiment.addData('blank250.started', globalClock.getTime());
+    blank250MaxDuration = null
+    // keep track of which components have finished
+    blank250Components = [];
+    blank250Components.push(text_11);
+    
+    for (const thisComponent of blank250Components)
+      if ('status' in thisComponent)
+        thisComponent.status = PsychoJS.Status.NOT_STARTED;
+    return Scheduler.Event.NEXT;
+  }
+}
+
+
+var frameRemains;
+function blank250RoutineEachFrame() {
+  return async function () {
+    //--- Loop for each frame of Routine 'blank250' ---
+    // get current time
+    t = blank250Clock.getTime();
+    frameN = frameN + 1;// number of completed frames (so 0 is the first frame)
+    // update/draw components on each frame
+    
+    // *text_11* updates
+    if (t >= 0.0 && text_11.status === PsychoJS.Status.NOT_STARTED) {
+      // keep track of start time/frame for later
+      text_11.tStart = t;  // (not accounting for frame time here)
+      text_11.frameNStart = frameN;  // exact frame index
+      
+      text_11.setAutoDraw(true);
+    }
+    
+    frameRemains = 0.0 + 0.25 - psychoJS.window.monitorFramePeriod * 0.75;// most of one frame period left
+    if (text_11.status === PsychoJS.Status.STARTED && t >= frameRemains) {
+      text_11.setAutoDraw(false);
+    }
+    
+    // Run 'Each Frame' code from code_2
+    if ((t > 0.25)) {
+        continueRoutine = false;
+    }
+    
+    // check for quit (typically the Esc key)
+    if (psychoJS.experiment.experimentEnded || psychoJS.eventManager.getKeys({keyList:['escape']}).length > 0) {
+      return quitPsychoJS('The [Escape] key was pressed. Goodbye!', false);
+    }
+    
+    // check if the Routine should terminate
+    if (!continueRoutine) {  // a component has requested a forced-end of Routine
+      return Scheduler.Event.NEXT;
+    }
+    
+    continueRoutine = false;  // reverts to True if at least one component still running
+    for (const thisComponent of blank250Components)
+      if ('status' in thisComponent && thisComponent.status !== PsychoJS.Status.FINISHED) {
+        continueRoutine = true;
+        break;
+      }
+    
+    // refresh the screen if continuing
+    if (continueRoutine && routineTimer.getTime() > 0) {
+      return Scheduler.Event.FLIP_REPEAT;
+    } else {
+      return Scheduler.Event.NEXT;
+    }
+  };
+}
+
+
+function blank250RoutineEnd(snapshot) {
+  return async function () {
+    //--- Ending Routine 'blank250' ---
+    for (const thisComponent of blank250Components) {
+      if (typeof thisComponent.setAutoDraw === 'function') {
+        thisComponent.setAutoDraw(false);
+      }
+    }
+    psychoJS.experiment.addData('blank250.stopped', globalClock.getTime());
+    if (blank250MaxDurationReached) {
+        routineTimer.add(blank250MaxDuration);
+    } else {
+        routineTimer.add(-0.250000);
+    }
+    // Routines running outside a loop should always advance the datafile row
+    if (currentLoop === psychoJS.experiment) {
+      psychoJS.experiment.nextEntry(snapshot);
+    }
+    return Scheduler.Event.NEXT;
+  }
+}
+
+
 var prob_trialMaxDurationReached;
 var gotValidClick;
 var prob_trialMaxDuration;
@@ -898,30 +1034,25 @@ function prob_trialRoutineBegin(snapshot) {
     continueRoutine = true; // until we're told otherwise
     prob_trialMaxDurationReached = false;
     // update component parameters for each repeat
-    text_2.setText(prompt);
-    text_3.setText(question);
-    button3.setText(ans1);
-    // reset button3 to account for continued clicks & clear times on/off
-    button3.reset()
-    button4.setText(ans2);
-    // reset button4 to account for continued clicks & clear times on/off
-    button4.reset()
-    button5.setText(ans3);
-    // reset button5 to account for continued clicks & clear times on/off
-    button5.reset()
+    text_2.setText(prompt_text);
+    text_3.setText(question_text);
     // setup some python lists for storing info about the mouse_2
     mouse_2.clicked_name = [];
     gotValidClick = false; // until a click is received
+    ans1_text.setText(ans1);
+    ans2_text.setText(ans2);
+    ans3_text.setText(ans3);
     psychoJS.experiment.addData('prob_trial.started', globalClock.getTime());
     prob_trialMaxDuration = null
     // keep track of which components have finished
     prob_trialComponents = [];
     prob_trialComponents.push(text_2);
     prob_trialComponents.push(text_3);
-    prob_trialComponents.push(button3);
-    prob_trialComponents.push(button4);
-    prob_trialComponents.push(button5);
     prob_trialComponents.push(mouse_2);
+    prob_trialComponents.push(ans1_text);
+    prob_trialComponents.push(ans2_text);
+    prob_trialComponents.push(ans3_text);
+    prob_trialComponents.push(text_10);
     
     for (const thisComponent of prob_trialComponents)
       if ('status' in thisComponent)
@@ -960,123 +1091,6 @@ function prob_trialRoutineEachFrame() {
       text_3.setAutoDraw(true);
     }
     
-    
-    // *button3* updates
-    if (t >= 0 && button3.status === PsychoJS.Status.NOT_STARTED) {
-      // keep track of start time/frame for later
-      button3.tStart = t;  // (not accounting for frame time here)
-      button3.frameNStart = frameN;  // exact frame index
-      
-      button3.setAutoDraw(true);
-    }
-    
-    if (button3.status === PsychoJS.Status.STARTED) {
-      // check whether button3 has been pressed
-      if (button3.isClicked) {
-        if (!button3.wasClicked) {
-          // store time of first click
-          button3.timesOn.push(button3.clock.getTime());
-          // store time clicked until
-          button3.timesOff.push(button3.clock.getTime());
-        } else {
-          // update time clicked until;
-          button3.timesOff[button3.timesOff.length - 1] = button3.clock.getTime();
-        }
-        if (!button3.wasClicked) {
-          // end routine when button3 is clicked
-          continueRoutine = false;
-          
-        }
-        // if button3 is still clicked next frame, it is not a new click
-        button3.wasClicked = true;
-      } else {
-        // if button3 is clicked next frame, it is a new click
-        button3.wasClicked = false;
-      }
-    } else {
-      // keep clock at 0 if button3 hasn't started / has finished
-      button3.clock.reset();
-      // if button3 is clicked next frame, it is a new click
-      button3.wasClicked = false;
-    }
-    
-    // *button4* updates
-    if (t >= 0 && button4.status === PsychoJS.Status.NOT_STARTED) {
-      // keep track of start time/frame for later
-      button4.tStart = t;  // (not accounting for frame time here)
-      button4.frameNStart = frameN;  // exact frame index
-      
-      button4.setAutoDraw(true);
-    }
-    
-    if (button4.status === PsychoJS.Status.STARTED) {
-      // check whether button4 has been pressed
-      if (button4.isClicked) {
-        if (!button4.wasClicked) {
-          // store time of first click
-          button4.timesOn.push(button4.clock.getTime());
-          // store time clicked until
-          button4.timesOff.push(button4.clock.getTime());
-        } else {
-          // update time clicked until;
-          button4.timesOff[button4.timesOff.length - 1] = button4.clock.getTime();
-        }
-        if (!button4.wasClicked) {
-          // end routine when button4 is clicked
-          continueRoutine = false;
-          
-        }
-        // if button4 is still clicked next frame, it is not a new click
-        button4.wasClicked = true;
-      } else {
-        // if button4 is clicked next frame, it is a new click
-        button4.wasClicked = false;
-      }
-    } else {
-      // keep clock at 0 if button4 hasn't started / has finished
-      button4.clock.reset();
-      // if button4 is clicked next frame, it is a new click
-      button4.wasClicked = false;
-    }
-    
-    // *button5* updates
-    if (t >= 0 && button5.status === PsychoJS.Status.NOT_STARTED) {
-      // keep track of start time/frame for later
-      button5.tStart = t;  // (not accounting for frame time here)
-      button5.frameNStart = frameN;  // exact frame index
-      
-      button5.setAutoDraw(true);
-    }
-    
-    if (button5.status === PsychoJS.Status.STARTED) {
-      // check whether button5 has been pressed
-      if (button5.isClicked) {
-        if (!button5.wasClicked) {
-          // store time of first click
-          button5.timesOn.push(button5.clock.getTime());
-          // store time clicked until
-          button5.timesOff.push(button5.clock.getTime());
-        } else {
-          // update time clicked until;
-          button5.timesOff[button5.timesOff.length - 1] = button5.clock.getTime();
-        }
-        if (!button5.wasClicked) {
-          // end routine when button5 is clicked
-          continueRoutine = false;
-          
-        }
-        // if button5 is still clicked next frame, it is not a new click
-        button5.wasClicked = true;
-      } else {
-        // if button5 is clicked next frame, it is a new click
-        button5.wasClicked = false;
-      }
-    } else {
-      // keep clock at 0 if button5 hasn't started / has finished
-      button5.clock.reset();
-      // if button5 is clicked next frame, it is a new click
-      button5.wasClicked = false;
-    }
     // *mouse_2* updates
     if (t >= 0.0 && mouse_2.status === PsychoJS.Status.NOT_STARTED) {
       // keep track of start time/frame for later
@@ -1094,7 +1108,7 @@ function prob_trialRoutineEachFrame() {
         if (_mouseButtons.reduce( (e, acc) => (e+acc) ) > 0) { // state changed to a new click
           // check if the mouse was inside our 'clickable' objects
           gotValidClick = false;
-          mouse_2.clickableObjects = eval([button3, button4, button5])
+          mouse_2.clickableObjects = eval([ans1_text, ans2_text, ans3_text])
           ;// make sure the mouse's clickable objects are an array
           if (!Array.isArray(mouse_2.clickableObjects)) {
               mouse_2.clickableObjects = [mouse_2.clickableObjects];
@@ -1115,6 +1129,46 @@ function prob_trialRoutineEachFrame() {
         }
       }
     }
+    
+    // *ans1_text* updates
+    if (t >= 0.0 && ans1_text.status === PsychoJS.Status.NOT_STARTED) {
+      // keep track of start time/frame for later
+      ans1_text.tStart = t;  // (not accounting for frame time here)
+      ans1_text.frameNStart = frameN;  // exact frame index
+      
+      ans1_text.setAutoDraw(true);
+    }
+    
+    
+    // *ans2_text* updates
+    if (t >= 0.0 && ans2_text.status === PsychoJS.Status.NOT_STARTED) {
+      // keep track of start time/frame for later
+      ans2_text.tStart = t;  // (not accounting for frame time here)
+      ans2_text.frameNStart = frameN;  // exact frame index
+      
+      ans2_text.setAutoDraw(true);
+    }
+    
+    
+    // *ans3_text* updates
+    if (t >= 0.0 && ans3_text.status === PsychoJS.Status.NOT_STARTED) {
+      // keep track of start time/frame for later
+      ans3_text.tStart = t;  // (not accounting for frame time here)
+      ans3_text.frameNStart = frameN;  // exact frame index
+      
+      ans3_text.setAutoDraw(true);
+    }
+    
+    
+    // *text_10* updates
+    if (t >= 0.0 && text_10.status === PsychoJS.Status.NOT_STARTED) {
+      // keep track of start time/frame for later
+      text_10.tStart = t;  // (not accounting for frame time here)
+      text_10.frameNStart = frameN;  // exact frame index
+      
+      text_10.setAutoDraw(true);
+    }
+    
     // check for quit (typically the Esc key)
     if (psychoJS.experiment.experimentEnded || psychoJS.eventManager.getKeys({keyList:['escape']}).length > 0) {
       return quitPsychoJS('The [Escape] key was pressed. Goodbye!', false);
@@ -1152,15 +1206,6 @@ function prob_trialRoutineEnd(snapshot) {
       }
     }
     psychoJS.experiment.addData('prob_trial.stopped', globalClock.getTime());
-    psychoJS.experiment.addData('button3.numClicks', button3.numClicks);
-    psychoJS.experiment.addData('button3.timesOn', button3.timesOn);
-    psychoJS.experiment.addData('button3.timesOff', button3.timesOff);
-    psychoJS.experiment.addData('button4.numClicks', button4.numClicks);
-    psychoJS.experiment.addData('button4.timesOn', button4.timesOn);
-    psychoJS.experiment.addData('button4.timesOff', button4.timesOff);
-    psychoJS.experiment.addData('button5.numClicks', button5.numClicks);
-    psychoJS.experiment.addData('button5.timesOn', button5.timesOn);
-    psychoJS.experiment.addData('button5.timesOff', button5.timesOff);
     // store data for psychoJS.experiment (ExperimentHandler)
     _mouseXYs = mouse_2.getPos();
     _mouseButtons = mouse_2.getPressed();
@@ -1197,23 +1242,20 @@ function gl_trialRoutineBegin(snapshot) {
     continueRoutine = true; // until we're told otherwise
     gl_trialMaxDurationReached = false;
     // update component parameters for each repeat
-    button1.setText(opt1);
-    // reset button1 to account for continued clicks & clear times on/off
-    button1.reset()
-    button2.setText(opt2);
-    // reset button2 to account for continued clicks & clear times on/off
-    button2.reset()
     // setup some python lists for storing info about the mouse
     mouse.clicked_name = [];
     gotValidClick = false; // until a click is received
+    opt1_text.setText(opt1);
+    opt2_text.setText(opt2);
     psychoJS.experiment.addData('gl_trial.started', globalClock.getTime());
     gl_trialMaxDuration = null
     // keep track of which components have finished
     gl_trialComponents = [];
     gl_trialComponents.push(text);
-    gl_trialComponents.push(button1);
-    gl_trialComponents.push(button2);
     gl_trialComponents.push(mouse);
+    gl_trialComponents.push(opt1_text);
+    gl_trialComponents.push(opt2_text);
+    gl_trialComponents.push(text_9);
     
     for (const thisComponent of gl_trialComponents)
       if ('status' in thisComponent)
@@ -1240,84 +1282,6 @@ function gl_trialRoutineEachFrame() {
       text.setAutoDraw(true);
     }
     
-    
-    // *button1* updates
-    if (t >= 0 && button1.status === PsychoJS.Status.NOT_STARTED) {
-      // keep track of start time/frame for later
-      button1.tStart = t;  // (not accounting for frame time here)
-      button1.frameNStart = frameN;  // exact frame index
-      
-      button1.setAutoDraw(true);
-    }
-    
-    if (button1.status === PsychoJS.Status.STARTED) {
-      // check whether button1 has been pressed
-      if (button1.isClicked) {
-        if (!button1.wasClicked) {
-          // store time of first click
-          button1.timesOn.push(button1.clock.getTime());
-          // store time clicked until
-          button1.timesOff.push(button1.clock.getTime());
-        } else {
-          // update time clicked until;
-          button1.timesOff[button1.timesOff.length - 1] = button1.clock.getTime();
-        }
-        if (!button1.wasClicked) {
-          // end routine when button1 is clicked
-          continueRoutine = false;
-          
-        }
-        // if button1 is still clicked next frame, it is not a new click
-        button1.wasClicked = true;
-      } else {
-        // if button1 is clicked next frame, it is a new click
-        button1.wasClicked = false;
-      }
-    } else {
-      // keep clock at 0 if button1 hasn't started / has finished
-      button1.clock.reset();
-      // if button1 is clicked next frame, it is a new click
-      button1.wasClicked = false;
-    }
-    
-    // *button2* updates
-    if (t >= 0 && button2.status === PsychoJS.Status.NOT_STARTED) {
-      // keep track of start time/frame for later
-      button2.tStart = t;  // (not accounting for frame time here)
-      button2.frameNStart = frameN;  // exact frame index
-      
-      button2.setAutoDraw(true);
-    }
-    
-    if (button2.status === PsychoJS.Status.STARTED) {
-      // check whether button2 has been pressed
-      if (button2.isClicked) {
-        if (!button2.wasClicked) {
-          // store time of first click
-          button2.timesOn.push(button2.clock.getTime());
-          // store time clicked until
-          button2.timesOff.push(button2.clock.getTime());
-        } else {
-          // update time clicked until;
-          button2.timesOff[button2.timesOff.length - 1] = button2.clock.getTime();
-        }
-        if (!button2.wasClicked) {
-          // end routine when button2 is clicked
-          continueRoutine = false;
-          
-        }
-        // if button2 is still clicked next frame, it is not a new click
-        button2.wasClicked = true;
-      } else {
-        // if button2 is clicked next frame, it is a new click
-        button2.wasClicked = false;
-      }
-    } else {
-      // keep clock at 0 if button2 hasn't started / has finished
-      button2.clock.reset();
-      // if button2 is clicked next frame, it is a new click
-      button2.wasClicked = false;
-    }
     // *mouse* updates
     if (t >= 0.0 && mouse.status === PsychoJS.Status.NOT_STARTED) {
       // keep track of start time/frame for later
@@ -1335,7 +1299,7 @@ function gl_trialRoutineEachFrame() {
         if (_mouseButtons.reduce( (e, acc) => (e+acc) ) > 0) { // state changed to a new click
           // check if the mouse was inside our 'clickable' objects
           gotValidClick = false;
-          mouse.clickableObjects = eval([button1, button2])
+          mouse.clickableObjects = eval([opt1_text, opt2_text])
           ;// make sure the mouse's clickable objects are an array
           if (!Array.isArray(mouse.clickableObjects)) {
               mouse.clickableObjects = [mouse.clickableObjects];
@@ -1356,6 +1320,36 @@ function gl_trialRoutineEachFrame() {
         }
       }
     }
+    
+    // *opt1_text* updates
+    if (t >= 0.0 && opt1_text.status === PsychoJS.Status.NOT_STARTED) {
+      // keep track of start time/frame for later
+      opt1_text.tStart = t;  // (not accounting for frame time here)
+      opt1_text.frameNStart = frameN;  // exact frame index
+      
+      opt1_text.setAutoDraw(true);
+    }
+    
+    
+    // *opt2_text* updates
+    if (t >= 0.0 && opt2_text.status === PsychoJS.Status.NOT_STARTED) {
+      // keep track of start time/frame for later
+      opt2_text.tStart = t;  // (not accounting for frame time here)
+      opt2_text.frameNStart = frameN;  // exact frame index
+      
+      opt2_text.setAutoDraw(true);
+    }
+    
+    
+    // *text_9* updates
+    if (t >= 0.0 && text_9.status === PsychoJS.Status.NOT_STARTED) {
+      // keep track of start time/frame for later
+      text_9.tStart = t;  // (not accounting for frame time here)
+      text_9.frameNStart = frameN;  // exact frame index
+      
+      text_9.setAutoDraw(true);
+    }
+    
     // check for quit (typically the Esc key)
     if (psychoJS.experiment.experimentEnded || psychoJS.eventManager.getKeys({keyList:['escape']}).length > 0) {
       return quitPsychoJS('The [Escape] key was pressed. Goodbye!', false);
@@ -1392,12 +1386,6 @@ function gl_trialRoutineEnd(snapshot) {
       }
     }
     psychoJS.experiment.addData('gl_trial.stopped', globalClock.getTime());
-    psychoJS.experiment.addData('button1.numClicks', button1.numClicks);
-    psychoJS.experiment.addData('button1.timesOn', button1.timesOn);
-    psychoJS.experiment.addData('button1.timesOff', button1.timesOff);
-    psychoJS.experiment.addData('button2.numClicks', button2.numClicks);
-    psychoJS.experiment.addData('button2.timesOn', button2.timesOn);
-    psychoJS.experiment.addData('button2.timesOff', button2.timesOff);
     // store data for psychoJS.experiment (ExperimentHandler)
     _mouseXYs = mouse.getPos();
     _mouseButtons = mouse.getPressed();
@@ -1432,7 +1420,7 @@ function end_taskRoutineBegin(snapshot) {
     end_taskClock.reset(); // clock
     frameN = -1;
     continueRoutine = true; // until we're told otherwise
-    routineTimer.add(5.000000);
+    routineTimer.add(3.000000);
     end_taskMaxDurationReached = false;
     // update component parameters for each repeat
     // Run 'Begin Routine' code from code
@@ -1468,7 +1456,6 @@ function end_taskRoutineBegin(snapshot) {
 }
 
 
-var frameRemains;
 function end_taskRoutineEachFrame() {
   return async function () {
     //--- Loop for each frame of Routine 'end_task' ---
@@ -1486,7 +1473,7 @@ function end_taskRoutineEachFrame() {
       text_8.setAutoDraw(true);
     }
     
-    frameRemains = 0.0 + 5 - psychoJS.window.monitorFramePeriod * 0.75;// most of one frame period left
+    frameRemains = 0.0 + 3 - psychoJS.window.monitorFramePeriod * 0.75;// most of one frame period left
     if (text_8.status === PsychoJS.Status.STARTED && t >= frameRemains) {
       text_8.setAutoDraw(false);
     }
@@ -1530,7 +1517,7 @@ function end_taskRoutineEnd(snapshot) {
     if (end_taskMaxDurationReached) {
         routineTimer.add(end_taskMaxDuration);
     } else {
-        routineTimer.add(-5.000000);
+        routineTimer.add(-3.000000);
     }
     // Routines running outside a loop should always advance the datafile row
     if (currentLoop === psychoJS.experiment) {
