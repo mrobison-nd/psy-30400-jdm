@@ -186,7 +186,7 @@ async function experimentInit() {
     draggable: false,
     letterHeight: 0.03,
     lineSpacing: 1.0,
-    size: [0.5, 0.2],  units: undefined, 
+    size: [0.5, 0.1],  units: undefined, 
     ori: 0.0,
     color: 'black', colorSpace: 'rgb',
     fillColor: undefined, borderColor: 'black',
@@ -222,7 +222,7 @@ async function experimentInit() {
     text: '',
     font: 'Arial',
     units: undefined, 
-    pos: [0.3, 0], draggable: false, height: 0.03,  wrapWidth: undefined, ori: 0.0,
+    pos: [0.3, (- 0.2)], draggable: false, height: 0.03,  wrapWidth: undefined, ori: 0.0,
     languageStyle: 'LTR',
     color: new util.Color('black'),  opacity: undefined,
     depth: -4.0 
@@ -750,7 +750,6 @@ function crt_trialRoutineBegin(snapshot) {
 }
 
 
-var frameRemains;
 function crt_trialRoutineEachFrame() {
   return async function () {
     //--- Loop for each frame of Routine 'crt_trial' ---
@@ -821,11 +820,6 @@ function crt_trialRoutineEachFrame() {
       text_6.frameNStart = frameN;  // exact frame index
       
       text_6.setAutoDraw(true);
-    }
-    
-    frameRemains = 0.0 + 1.0 - psychoJS.window.monitorFramePeriod * 0.75;// most of one frame period left
-    if (text_6.status === PsychoJS.Status.STARTED && t >= frameRemains) {
-      text_6.setAutoDraw(false);
     }
     
     // check for quit (typically the Esc key)
@@ -1474,6 +1468,7 @@ function end_taskRoutineBegin(snapshot) {
 }
 
 
+var frameRemains;
 function end_taskRoutineEachFrame() {
   return async function () {
     //--- Loop for each frame of Routine 'end_task' ---
