@@ -5,10 +5,10 @@
     <Param val="ptb" valType="str" updates="None" name="Audio lib"/>
     <Param val="" valType="str" updates="None" name="Completed URL"/>
     <Param val="auto" valType="str" updates="None" name="Data file delimiter"/>
-    <Param val="u'data/%s_%s_%s' % (expInfo['participant'], expName, expInfo['date'])" valType="code" updates="None" name="Data filename"/>
+    <Param val="u'data/%s_%s_%s' % (expInfo['name'], expName, expInfo['date'])" valType="code" updates="None" name="Data filename"/>
     <Param val="True" valType="bool" updates="None" name="Enable Escape"/>
     <Param val="Thank you for your patience." valType="str" updates="None" name="End Message"/>
-    <Param val="{'first name': '', 'last name': '', 'participant': 'f&quot;{randint(0, 999999):06.0f}&quot;'}" valType="code" updates="None" name="Experiment info"/>
+    <Param val="{'name': ''}" valType="code" updates="None" name="Experiment info"/>
     <Param val="True" valType="bool" updates="None" name="Force stereo"/>
     <Param val="True" valType="bool" updates="None" name="Full-screen window"/>
     <Param val="" valType="str" updates="None" name="HTML path"/>
@@ -70,7 +70,7 @@
     <Param val="1000" valType="num" updates="None" name="plPupilRemoteTimeoutMs"/>
     <Param val="False" valType="bool" updates="None" name="plPupillometryOnly"/>
     <Param val="psychopy_iohub_surface" valType="str" updates="None" name="plSurfaceName"/>
-    <Param val="0" valType="code" updates="None" name="runMode"/>
+    <Param val="1" valType="code" updates="None" name="runMode"/>
     <Param val="False" valType="bool" updates="None" name="rush"/>
     <Param val="time" valType="str" updates="None" name="sortColumns"/>
     <Param val="" valType="str" updates="None" name="tbLicenseFile"/>
@@ -669,23 +669,6 @@
         <Param val="" valType="code" updates="constant" name="stopVal"/>
         <Param val="False" valType="bool" updates="None" name="useWindowParams"/>
       </RoutineSettingsComponent>
-      <CodeComponent name="code" plugin="None">
-        <Param val="" valType="extendedCode" updates="constant" name="Before Experiment"/>
-        <Param val="" valType="extendedCode" updates="constant" name="Before JS Experiment"/>
-        <Param val="" valType="extendedCode" updates="constant" name="Begin Experiment"/>
-        <Param val="" valType="extendedCode" updates="constant" name="Begin JS Experiment"/>
-        <Param val="// Disable saving results to Pavlovia&amp;#10;psychoJS._saveResults = 0;&amp;#10;&amp;#10;// Generate filename for results&amp;#10;let filename = psychoJS.experiment._experimentName + '_' + util.toString(expInfo[&quot;participant&quot;]) + '.csv';&amp;#10;&amp;#10;// Extract and convert data to CSV&amp;#10;let dataObj = psychoJS.experiment._trialsData;&amp;#10;let data = [Object.keys(dataObj[0])].concat(dataObj).map(it =&gt; { return Object.values(it).toString() }).join('\n');&amp;#10;&amp;#10;// Trigger download&amp;#10;let link = document.createElement('a');&amp;#10;link.setAttribute('href', 'data:text/csv;charset=utf-8,' + encodeURI(data));&amp;#10;link.setAttribute('download', filename);&amp;#10;link.style.display = 'none';&amp;#10;document.body.appendChild(link);&amp;#10;link.click();&amp;#10;document.body.removeChild(link);" valType="extendedCode" updates="constant" name="Begin JS Routine"/>
-        <Param val="// Disable saving results to Pavlovia&amp;#10;psychoJS._saveResults = 0;&amp;#10;&amp;#10;// Generate filename for results&amp;#10;let filename = psychoJS.experiment._experimentName + '_' + util.toString(expInfo[&quot;participant&quot;]) + '.csv';&amp;#10;&amp;#10;// Extract and convert data to CSV&amp;#10;let dataObj = psychoJS.experiment._trialsData;&amp;#10;let data = [Object.keys(dataObj[0])].concat(dataObj).map(it =&gt; { return Object.values(it).toString() }).join('\n');&amp;#10;&amp;#10;// Trigger download&amp;#10;let link = document.createElement('a');&amp;#10;link.setAttribute('href', 'data:text/csv;charset=utf-8,' + encodeURI(data));&amp;#10;link.setAttribute('download', filename);&amp;#10;link.style.display = 'none';&amp;#10;document.body.appendChild(link);&amp;#10;link.click();&amp;#10;document.body.removeChild(link);" valType="extendedCode" updates="constant" name="Begin Routine"/>
-        <Param val="JS" valType="str" updates="None" name="Code Type"/>
-        <Param val="" valType="extendedCode" updates="constant" name="Each Frame"/>
-        <Param val="" valType="extendedCode" updates="constant" name="Each JS Frame"/>
-        <Param val="" valType="extendedCode" updates="constant" name="End Experiment"/>
-        <Param val="" valType="extendedCode" updates="constant" name="End JS Experiment"/>
-        <Param val="" valType="extendedCode" updates="constant" name="End JS Routine"/>
-        <Param val="" valType="extendedCode" updates="constant" name="End Routine"/>
-        <Param val="False" valType="bool" updates="None" name="disabled"/>
-        <Param val="code" valType="code" updates="None" name="name"/>
-      </CodeComponent>
       <TextComponent name="text_8" plugin="None">
         <Param val="black" valType="color" updates="constant" name="color"/>
         <Param val="rgb" valType="str" updates="constant" name="colorSpace"/>
